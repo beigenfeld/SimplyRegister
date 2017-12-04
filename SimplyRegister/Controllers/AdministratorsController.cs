@@ -123,5 +123,17 @@ namespace SimplyRegister.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CompanyPassword()
+        {
+            return View();
+        }
+
+        public ActionResult AdminHome()
+        {
+            return View();
+        }
+
+
     }
 }
