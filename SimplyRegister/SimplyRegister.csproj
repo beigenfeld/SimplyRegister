@@ -178,8 +178,17 @@
     <Compile Include="Migrations\201712041531394_InitialCreate.Designer.cs">
       <DependentUpon>201712041531394_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041728002_Added Event table.cs" />
+    <Compile Include="Migrations\201712041728002_Added Event table.Designer.cs">
+      <DependentUpon>201712041728002_Added Event table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712041746043_Added Company table.cs" />
+    <Compile Include="Migrations\201712041746043_Added Company table.Designer.cs">
+      <DependentUpon>201712041746043_Added Company table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -262,6 +271,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712041531394_InitialCreate.resx">
       <DependentUpon>201712041531394_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041728002_Added Event table.resx">
+      <DependentUpon>201712041728002_Added Event table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041746043_Added Company table.resx">
+      <DependentUpon>201712041746043_Added Company table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
