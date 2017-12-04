@@ -1,0 +1,42 @@
+﻿@model SimplyRegister.Models.Company
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Company</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.companyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mainContactEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mainContactEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyMembershipLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyMembershipLevel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.companyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

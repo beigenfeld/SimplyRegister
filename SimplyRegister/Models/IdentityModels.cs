@@ -31,5 +31,9 @@ namespace SimplyRegister.Models
         }
 
         public System.Data.Entity.DbSet<SimplyRegister.Models.Event> Events { get; set; }
+
+        public System.Data.Entity.DbSet<SimplyRegister.Models.Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<SimplyRegister.Models.Customer> Customers { get; set; }
     }
 }

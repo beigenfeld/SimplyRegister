@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SimplyRegister.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.companyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mainContactEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.companyMembershipLevel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.companyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mainContactEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.companyMembershipLevel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.companyId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.companyId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.companyId })
+        </td>
+    </tr>
+}
+
+</table>
