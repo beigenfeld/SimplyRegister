@@ -29,5 +29,7 @@ namespace SimplyRegister.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SimplyRegister.Models.Event> Events { get; set; }
     }
 }
