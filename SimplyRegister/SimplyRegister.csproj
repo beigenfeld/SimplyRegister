@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorsController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -192,8 +193,17 @@
     <Compile Include="Migrations\201712041925290_Added customer table.Designer.cs">
       <DependentUpon>201712041925290_Added customer table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041935564_Added Adnim table.cs" />
+    <Compile Include="Migrations\201712041935564_Added Adnim table.Designer.cs">
+      <DependentUpon>201712041935564_Added Adnim table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712041942052_Added Key attribute to adminId.cs" />
+    <Compile Include="Migrations\201712041942052_Added Key attribute to adminId.Designer.cs">
+      <DependentUpon>201712041942052_Added Key attribute to adminId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Event.cs" />
@@ -273,6 +283,11 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Administrators\Create.cshtml" />
+    <Content Include="Views\Administrators\Delete.cshtml" />
+    <Content Include="Views\Administrators\Details.cshtml" />
+    <Content Include="Views\Administrators\Edit.cshtml" />
+    <Content Include="Views\Administrators\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -297,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712041925290_Added customer table.resx">
       <DependentUpon>201712041925290_Added customer table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041935564_Added Adnim table.resx">
+      <DependentUpon>201712041935564_Added Adnim table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041942052_Added Key attribute to adminId.resx">
+      <DependentUpon>201712041942052_Added Key attribute to adminId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

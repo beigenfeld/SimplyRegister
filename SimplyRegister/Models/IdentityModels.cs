@@ -35,5 +35,7 @@ namespace SimplyRegister.Models
         public System.Data.Entity.DbSet<SimplyRegister.Models.Company> Companies { get; set; }
 
         public System.Data.Entity.DbSet<SimplyRegister.Models.Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<SimplyRegister.Models.Administrator> Administrators { get; set; }
     }
 }
