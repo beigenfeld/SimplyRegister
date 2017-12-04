@@ -1,0 +1,37 @@
+At my previous place of employment, they had an issue with not having an effective online registration system.  I worked at a construction association where there were many different levels of membership, each with different benefits.  Membership was on a company-wide basis, and depended on if they were a General Contractor (Corporate Membership), Subcontractor (Associate Membership), if they had given our the association their Collective Bargaining rights (CBA), or contributed to the Industry Advancement Fund through the association (IAP).  Additionally, there is another group run by the association called the Construction Leadership Council.  Membership to this group required the participant's company to be a Corporate or Assocaite member, but was on an individual basis.  However, the association also offers At-Large memberships, which are not assigned to a specific individual, and are used up on a first-come first-served basis.
+
+My goal is to create a web application registration system, which will automatically detect if a registrant's company is in the system and assign the appropriate price based on his or her particular company and individual memberships.
+
+User stories:
+
+As a user, I would like to be able to create a personal profile and see a list of events and trainings. 
+
+As an employee of a Corporate Member company, I want to be able to see and register at the Corporate price, and have the choice to pay online or have an invoice sent to my company.
+
+As an employee of an Associate Member company, I want to be able to see and register at the Associate price, and have the choice to pay online or have an invoice sent to my company.
+
+As an employee of a CBA company, I want to be able to see and register at the CBA price, and have the choice to pay online or have an invoice sent to my company.
+
+As an employee of an IAP-contributing company, I want to be able to see and register at the IAP price, and have the choice to pay online or have an invoice sent to my company.
+
+As a non-member, I want to be alerted as to which events are members-only and I am unable to attend.
+
+As a non-member, I want to be able to pay for any events I am able to attend by credit card through the application.
+
+As a user who created a profile as a non-member, I want the ability to change my status should my company become a member of any type, so that I may receive the appropriate pricing for events.
+
+As the main contact for a member company, I want to receive an email whenever a new profile is created by one of my employees for verification that they are indeed an employee of the company.  Via this email, I can click a link either confirming or denying the status of the profile.
+
+As an administrator at the association, I want to be alerted when a registrant chooses the option to send an invoice to their company.
+
+As an administrator, I want to be able to override the structured pricing system, should any exceptions to the system arise.
+
+As an administrator, I want the ability to add, delete, and update events.
+
+
+Nice to have:
+As a CLC member registering for a CLC event, I want to receive the appropriate price based on my individual membership.
+
+As an employee of an Association Member with available At-Large CLC Memberships, I want to receive the appropriate price level for that membership.  If all available At-Large memberships have been used, I want to be notified and receive the AGC Member price level.
+
+As an administrator, I want the system to have an automatic mechanism to send a verification email to a new profile creator to ensure the individual is connected to the appropriate company, before their profile is made active.
