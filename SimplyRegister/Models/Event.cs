@@ -7,7 +7,7 @@ namespace SimplyRegister.Models
 {
     public class Event
     {
-        public string eventId { get; set; }
+        public int eventId { get; set; }
 
         public string eventName { get; set; }
 

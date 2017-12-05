@@ -9,7 +9,7 @@ namespace SimplyRegister.Models
     public class Administrator
     {
         [Key]
-        public string adminId { get; set; }
+        public int adminId { get; set; }
 
         public string adminFirstName { get; set; }
 

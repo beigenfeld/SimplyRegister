@@ -15,13 +15,10 @@
         <h4>Company</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.companyId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.companyId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
+
+        @Html.HiddenFor(model => model.companyId);
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -30,7 +27,7 @@
                 @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.mainContactEmail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -40,11 +37,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.companyMembershipLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.companyMembershipLevel, htmlAttributes: new { @class = "control-label col-md-2" })  
             <div class="col-md-10">
-                @Html.EditorFor(model => model.companyMembershipLevel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(c => c.companyMembershipLevel, new List<SelectListItem>
+                { new SelectListItem{Text="Corporate", Value="Corporate"},
+                 new SelectListItem{Text="Associate", Value="Associate"},
+                 new SelectListItem{Text="CBA", Value="CBA"},
+                 new SelectListItem{Text="IAP", Value="IAP"},
+                 new SelectListItem{Text="Non-Member", Value="Non-Member"},
+                }, "Select Company Membership Level")
+               @* @Html.EditorFor(model => model.companyMembershipLevel, new { htmlAttributes = new { @class = "form-control" } }) *@
                 @Html.ValidationMessageFor(model => model.companyMembershipLevel, "", new { @class = "text-danger" })
             </div>
+       
         </div>
 
         <div class="form-group">

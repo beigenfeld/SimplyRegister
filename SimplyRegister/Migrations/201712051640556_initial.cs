@@ -3,10 +3,55 @@ namespace SimplyRegister.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Administrators",
+                c => new
+                    {
+                        adminId = c.Int(nullable: false, identity: true),
+                        adminFirstName = c.String(),
+                        adminLastName = c.String(),
+                        adminCurrentEmployee = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.adminId);
+            
+            CreateTable(
+                "dbo.Companies",
+                c => new
+                    {
+                        companyId = c.Int(nullable: false, identity: true),
+                        companyName = c.String(),
+                        mainContactEmail = c.String(),
+                        companyMembershipLevel = c.String(),
+                    })
+                .PrimaryKey(t => t.companyId);
+            
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        customerId = c.Int(nullable: false, identity: true),
+                        firstName = c.String(),
+                        lastName = c.String(),
+                        customerCompany = c.String(),
+                        clcMember = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.customerId);
+            
+            CreateTable(
+                "dbo.Events",
+                c => new
+                    {
+                        eventId = c.Int(nullable: false, identity: true),
+                        eventName = c.String(),
+                        eventDate = c.DateTime(nullable: false),
+                        eventType = c.String(),
+                    })
+                .PrimaryKey(t => t.eventId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -94,6 +139,10 @@ namespace SimplyRegister.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Events");
+            DropTable("dbo.Customers");
+            DropTable("dbo.Companies");
+            DropTable("dbo.Administrators");
         }
     }
 }

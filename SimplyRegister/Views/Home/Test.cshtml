@@ -1,0 +1,74 @@
+﻿@model SimplyRegister.Models.Company
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<style type="text/css">
+    #nav {
+        margin: 0px;
+    }
+
+        #nav ul {
+            padding: 0;
+            list-style: none;
+        }
+
+            #nav ul li {
+                float: left;
+                text-align: center;
+                width: 120px;
+                margin: 1px;
+            }
+
+                #nav ul li a {
+                    color: #fff;
+                    text-decoration: none;
+                    font-family: Calibri;
+                    background: #0a0;
+                    display: block;
+                    padding: 10px;
+                }
+
+                    #nav ul li a:hover {
+                        background: #0e0;
+                        color: #000;
+                    }
+
+                #nav ul li ul {
+                    display: none;
+                }
+
+                #nav ul li:hover ul {
+                    display: block;
+                }
+</style>
+
+<div id="nav">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li>
+            <a href="#">Products</a>
+            <ul>
+                <li><a href="#">Mobile</a></li>
+                <li><a href="#">Laptop</a></li>
+                <li><a href="#">Computer</a></li>
+            </ul>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>
+
+
+
+
+<div class="form-group">
+        @Html.DropDownListFor(c => c.companyMembershipLevel, new List<SelectListItem>
+                { new SelectListItem{Text="Corporate", Value="Corporate"},
+                 new SelectListItem{Text="Associate", Value="Associate"},
+                 new SelectListItem{Text="CBA", Value="CBA"},
+                 new SelectListItem{Text="IAP", Value="IAP"},
+                 new SelectListItem{Text="Non-Member", Value="Non-Member"},
+   }, "Select Company Membership Level")
+</div>

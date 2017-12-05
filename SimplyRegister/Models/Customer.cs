@@ -7,7 +7,7 @@ namespace SimplyRegister.Models
 {
     public class Customer
     {
-        public string customerId { get; set; }
+        public int customerId { get; set; }
 
         public string firstName { get; set; }
 

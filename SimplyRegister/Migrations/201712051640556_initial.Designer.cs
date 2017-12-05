@@ -7,13 +7,13 @@ namespace SimplyRegister.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Addedcustomertable : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Addedcustomertable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712041925290_Added customer table"; }
+            get { return "201712051640556_initial"; }
         }
         
         string IMigrationMetadata.Source

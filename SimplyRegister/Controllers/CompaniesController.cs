@@ -46,16 +46,29 @@ namespace SimplyRegister.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "companyId,companyName,mainContactEmail,companyMembershipLevel")] Company company)
+        public ActionResult Create(/*[Bind(Include = "companyId,companyName,mainContactEmail,companyMembershipLevel")]*/ Company company)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    db.Companies.Add(company);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //return View(company);
+            if(company.companyId == 0)
             {
                 db.Companies.Add(company);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
-
-            return View(company);
+            else
+            {
+                var companyInDB = db.Companies.Single(m => m.companyId == company.companyId);
+                companyInDB.companyName = company.companyName;
+                companyInDB.mainContactEmail = company.mainContactEmail;
+                companyInDB.companyMembershipLevel = company.companyMembershipLevel;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Companies");
         }
 
         // GET: Companies/Edit/5
@@ -123,5 +136,9 @@ namespace SimplyRegister.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+
+
     }
 }
