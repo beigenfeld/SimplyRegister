@@ -15,6 +15,14 @@ namespace SimplyRegister.Models
 
         public string eventType { get; set; }//Corporate, Training, CLC, other
 
+        public double corporatePrice { get; set; }
 
+        public double assocaitePrice { get; set; }
+
+        public double cbaPrice { get; set; }
+
+        public double iapPrice { get; set; }
+
+        public double nonMemberPrice { get; set; }
     }
 }

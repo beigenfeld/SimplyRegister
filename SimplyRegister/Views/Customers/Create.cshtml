@@ -15,13 +15,7 @@
         <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.customerId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.customerId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.customerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,15 +33,36 @@
             </div>
         </div>
 
+        Search this list to see if your company is a member:
+        <div class="form-group">
+            @Html.LabelFor(model => model.customerCompany, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.companyId, new SelectList(Model.Companies, "companyId","companyName"),"", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.customerCompany, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        @*If you did not find your company, please enter your Company name here:
         <div class="form-group">
             @Html.LabelFor(model => model.customerCompany, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.customerCompany, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.customerCompany, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
+                Create new Company with membership level of non-member
+
+            </div>
+        </div>*@
+
+        
+
+
+
+
+
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.clcMember, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -55,7 +70,7 @@
                     @Html.ValidationMessageFor(model => model.clcMember, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

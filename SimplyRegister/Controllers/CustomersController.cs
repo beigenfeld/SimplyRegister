@@ -38,7 +38,13 @@ namespace SimplyRegister.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            return View();
+            var companiesList = db.Companies.ToList();
+            Customer customer = new Customer()
+            {
+                companyId = 0,
+                Companies = companiesList
+            };
+            return View(customer);
         }
 
         // POST: Customers/Create
@@ -46,13 +52,15 @@ namespace SimplyRegister.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,customerCompany,clcMember")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,customerCompany,clcMember")] Customer customer, Company company)
         {
             if (ModelState.IsValid)
             {
+                customer.isAdmin = false;
+                customer.customerCompany = company.companyId;
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Register", "Account", customer);
             }
 
             return View(customer);
@@ -123,5 +131,60 @@ namespace SimplyRegister.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CustomerHome()
+        {
+            return View();
+        }
+
+        public ActionResult CompanyPassword()
+        {
+            return View();
+        }
+
+
+
+
+
+        // GET: Customers/Create
+        public ActionResult AdminCreate()
+        {
+            var companiesList = db.Companies.ToList();
+            Customer customer = new Customer()
+            {
+                companyId = 0,
+                Companies = companiesList
+            };
+            return View(customer);
+        }
+
+        // POST: Customers/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminCreate([Bind(Include = "customerId,firstName,lastName,customerCompany,clcMember")] Customer customer, Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                customer.isAdmin = true;
+                customer.customerCompany = company.companyId;
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                return RedirectToAction("Register", "Account", customer);
+            }
+
+            return View(customer);
+        }
+
+        public ActionResult AdminHome()
+        {
+            return View();
+        }
+
+
+
+
+
     }
 }

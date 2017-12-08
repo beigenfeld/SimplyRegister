@@ -9,6 +9,7 @@ namespace SimplyRegister.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public bool IsAdmin { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -35,7 +36,6 @@ namespace SimplyRegister.Models
         public System.Data.Entity.DbSet<SimplyRegister.Models.Company> Companies { get; set; }
 
         public System.Data.Entity.DbSet<SimplyRegister.Models.Customer> Customers { get; set; }
-
-        public System.Data.Entity.DbSet<SimplyRegister.Models.Administrator> Administrators { get; set; }
+        
     }
 }

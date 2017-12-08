@@ -71,7 +71,7 @@ namespace SimplyRegister.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
-            }
+            } 
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -80,6 +80,11 @@ namespace SimplyRegister.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+                //if (Administrator)
+                //{
+                //    return RedirectToAction("Index", "Admin");
+                //}
+                //{ }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -162,8 +167,19 @@ namespace SimplyRegister.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
 
-                    return RedirectToAction("Index", "Home");
+                    if (user.IsAdmin == true)
+                    {
+                        return RedirectToAction("AdminHomme", "Customers");
+                    }
+                    
+                    else if (user.IsAdmin == false)
+                    {
+                        return RedirectToAction("CustomerHome", "Customers");
+                    }
+                    
+                    //return RedirectToAction("Create", "Administrators" )
                 }
                 AddErrors(result);
             }

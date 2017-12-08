@@ -13,6 +13,7 @@ namespace SimplyRegister.Controllers
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: Events
         public ActionResult Index()
@@ -38,7 +39,8 @@ namespace SimplyRegister.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            return View();
+            Event @event = new Event();
+            return View(@event);
         }
 
         // POST: Events/Create
@@ -52,7 +54,15 @@ namespace SimplyRegister.Controllers
             {
                 db.Events.Add(@event);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (@event.eventType == "Corporate")
+                {
+                    return RedirectToAction("SetCorporateEventPrices", @event);
+                }
+                else if (@event.eventType == "Training")
+                {
+                    return RedirectToAction("SetTrainingEventPrices", @event);
+                }
+                
             }
 
             return View(@event);
@@ -78,7 +88,7 @@ namespace SimplyRegister.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "eventId,eventName,eventDate,eventType")] Event @event)
+        public ActionResult Edit([Bind(Include = "eventId,eventName,eventDate,eventType, corporatePrice, assocaitePrice, cbaPrice, iapPrice, nonMemberPrice ")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -123,5 +133,72 @@ namespace SimplyRegister.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //GET
+        public ActionResult SetCorporateEventPrices(Event @event, bool overloadFiller = false)
+        {
+            return View(@event);
+        }
+
+        //POST
+        [HttpPost]
+        public ActionResult SetCorporateEventPrices([Bind(Include = "eventId, eventName, eventDate, eventType, corporatePrice, assocaitePrice, cbaPrice, iapPrice, nonMemberPrice")] Event @event)
+        {
+            // potential solution: @Html.HiddenFor()
+            // Include = eventName and eventDate and eventType ???
+            //Put instead of Post?
+            //public void Put(int id, [FromBody]string value{}
+
+            //var query = from thisEvent in db.Events
+            //            where thisEvent.eventId == @event.eventId;
+            //            select thisEvent;
+
+            //@event.corporatePrice = ;
+            //@event.assocaitePrice = ;
+            //@event.cbaPrice = ;
+            //@event.iapPrice = ;
+            //@event.nonMemberPrice = ;
+            if (ModelState.IsValid)
+            {
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(@event);
+
+            //db.SaveChanges();
+            //    return View("Index", "Events");
+        }
+
+
+        //GET
+        public ActionResult SetTrainingEventPrices(Event @event, bool overloadFiller = false)
+        {
+            return View(@event);
+        }
+
+
+        //POST
+        [HttpPost]
+        public ActionResult SetTrainingEventPrices([Bind(Include = "eventId, eventName, eventDate, eventType, corporatePrice, assocaitePrice, cbaPrice, iapPrice, nonMemberPrice")] Event @event)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(@event);
+        }
+
+
+
+
+
+
+
+
+
     }
 }

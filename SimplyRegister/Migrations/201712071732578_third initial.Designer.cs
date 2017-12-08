@@ -7,13 +7,13 @@ namespace SimplyRegister.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class thirdinitial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(thirdinitial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712051640556_initial"; }
+            get { return "201712071732578_third initial"; }
         }
         
         string IMigrationMetadata.Source

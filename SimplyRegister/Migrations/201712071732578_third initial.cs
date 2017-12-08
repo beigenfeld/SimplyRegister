@@ -3,21 +3,10 @@ namespace SimplyRegister.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class thirdinitial : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Administrators",
-                c => new
-                    {
-                        adminId = c.Int(nullable: false, identity: true),
-                        adminFirstName = c.String(),
-                        adminLastName = c.String(),
-                        adminCurrentEmployee = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.adminId);
-            
             CreateTable(
                 "dbo.Companies",
                 c => new
@@ -36,10 +25,14 @@ namespace SimplyRegister.Migrations
                         customerId = c.Int(nullable: false, identity: true),
                         firstName = c.String(),
                         lastName = c.String(),
-                        customerCompany = c.String(),
+                        customerCompany = c.Int(nullable: false),
                         clcMember = c.Boolean(nullable: false),
+                        isAdmin = c.Boolean(nullable: false),
+                        companyId = c.Int(),
                     })
-                .PrimaryKey(t => t.customerId);
+                .PrimaryKey(t => t.customerId)
+                .ForeignKey("dbo.Companies", t => t.companyId)
+                .Index(t => t.companyId);
             
             CreateTable(
                 "dbo.Events",
@@ -80,6 +73,7 @@ namespace SimplyRegister.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        IsAdmin = c.Boolean(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -128,12 +122,14 @@ namespace SimplyRegister.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Customers", "companyId", "dbo.Companies");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Customers", new[] { "companyId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -142,7 +138,6 @@ namespace SimplyRegister.Migrations
             DropTable("dbo.Events");
             DropTable("dbo.Customers");
             DropTable("dbo.Companies");
-            DropTable("dbo.Administrators");
         }
     }
 }

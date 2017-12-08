@@ -72,3 +72,46 @@
                  new SelectListItem{Text="Non-Member", Value="Non-Member"},
    }, "Select Company Membership Level")
 </div>
+
+
+
+
+
+[RequiredIf("Mobile == null",
+    ErrorMessage = "At least email or phone should be provided.")]
+public string Phone{ get; set; }
+
+[RequiredIf("Phone == null",
+    ErrorMessage = "At least email or phone should be provided.")]
+public string Mobile { get; set; }
+
+
+
+
+
+
+
+<div class="form-group">
+    protected void BtnSearch_Click(object sender, ImageClickEventArgs e)
+    {
+
+    SqlConnection con = new SqlConnection(_connString);
+    SqlCommand cmdSearch = new SqlCommand("Select cusName,cusCode from tblCustomer where cusName='" + TxtSearch.Text + "' or cusCode ='" + TxtSearch.Text + "' ", con);
+
+    SqlDataAdapter da = new SqlDataAdapter(cmdSearch);
+    DataTable dt = new DataTable();
+
+    da.Fill(dt);
+    if (dt.Rows.Count == 0)
+    {
+
+    ScriptManager.RegisterStartupScript(this, this.GetType(), "RunCode", "javascript:alert('Sorry No Records Found with this Keyword.....');document.location.href='SamePage.aspx';", true);
+
+    }
+    else
+    {
+    GridViewTesting.DataSource = dt;
+    GridViewTesting.DataBind();
+    }
+    }
+</div>
