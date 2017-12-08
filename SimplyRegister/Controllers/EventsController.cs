@@ -145,20 +145,7 @@ namespace SimplyRegister.Controllers
         [HttpPost]
         public ActionResult SetCorporateEventPrices([Bind(Include = "eventId, eventName, eventDate, eventType, corporatePrice, assocaitePrice, cbaPrice, iapPrice, nonMemberPrice")] Event @event)
         {
-            // potential solution: @Html.HiddenFor()
-            // Include = eventName and eventDate and eventType ???
-            //Put instead of Post?
-            //public void Put(int id, [FromBody]string value{}
-
-            //var query = from thisEvent in db.Events
-            //            where thisEvent.eventId == @event.eventId;
-            //            select thisEvent;
-
-            //@event.corporatePrice = ;
-            //@event.assocaitePrice = ;
-            //@event.cbaPrice = ;
-            //@event.iapPrice = ;
-            //@event.nonMemberPrice = ;
+            
             if (ModelState.IsValid)
             {
                 db.Entry(@event).State = EntityState.Modified;
@@ -166,9 +153,7 @@ namespace SimplyRegister.Controllers
                 return RedirectToAction("Index");
             }
             return View(@event);
-
-            //db.SaveChanges();
-            //    return View("Index", "Events");
+            
         }
 
 
