@@ -1,0 +1,56 @@
+﻿@model SimplyRegister.Models.Registration
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Registration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.amountBilled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amountBilled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amountPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amountPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invoiceRequested)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invoiceRequested)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invoiceSent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invoiceSent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

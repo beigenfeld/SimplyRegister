@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -24,5 +26,12 @@ namespace SimplyRegister.Models
         public double iapPrice { get; set; }
 
         public double nonMemberPrice { get; set; }
+
+        public List<Customer> Registration { get; set; }
+
+
+        public virtual ICollection<Registration> Registrations { get; set; }
+
+
     }
 }

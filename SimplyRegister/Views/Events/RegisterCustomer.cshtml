@@ -1,0 +1,91 @@
+﻿@model SimplyRegister.Models.Event
+@using Microsoft.AspNet.Identity;
+@using SimplyRegister.Models;
+@{
+    ViewBag.Title = Model.eventName;
+}
+
+<h2>RegisterCustomer</h2>
+<h2>@Model.eventName</h2>
+
+<div>
+
+
+    @{
+        ApplicationDbContext db = new ApplicationDbContext();
+        var Id = User.Identity.GetUserId();
+        var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
+        var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
+        var priceLevel = company.companyMembershipLevel;
+        double actualPrice = 0;
+        <h2>@customer.firstName</h2>
+        <h2>@company.companyName</h2>
+
+        <p>Your price:</p>
+        if (priceLevel == "Corporate")
+        {
+            <h2> $@Model.corporatePrice</h2>
+            actualPrice = Model.corporatePrice;
+        }
+        else if (priceLevel == "Associate")
+        {
+            <h2> $@Model.assocaitePrice</h2>
+            actualPrice = Model.assocaitePrice;
+        }
+        else if (priceLevel == "CBA")
+        {
+            <h2> $@Model.cbaPrice</h2>
+            actualPrice = Model.cbaPrice;
+        }
+        else if (priceLevel == "IAP")
+        {
+            <h2> $@Model.iapPrice</h2>
+            actualPrice = Model.iapPrice;
+        }
+        else if (priceLevel == "Non-Member")
+        {
+            <h2> $@Model.nonMemberPrice</h2>
+            actualPrice = Model.nonMemberPrice;
+        }
+        Registration registration = new Registration();
+        registration.customerId = customer.customerId;
+        registration.eventId = Model.eventId;
+        registration.amountBilled = actualPrice;
+        @Html.ActionLink("Register & Pay", "RegisterCustomer", "Events", new { reg = registration}, null)
+
+        //var currentUserName = <h2>@User.Identity.Name;</h2>
+                @*var currentUserId = <h2>@Model.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).First();</h2>*@
+
+    @*var user = UserManager.FindById(User.Identity.GetUserId())
+
+    @var priceLevel = customer.company.companyMembershipLevel;
+    @if  (priceLevel == "Corporate")
+    {
+    registration.amountBilled = Model.@event.corporatePrice;
+    }
+    else if (priceLevel == "Associate")
+    {
+    registration.amountBilled = @event.assocaitePrice;
+    }
+    else if (priceLevel == "CBA")
+    {
+    registration.amountBilled = @event.cbaPrice;
+    }
+    else if (priceLevel == "IAP")
+    {
+    registration.amountBilled = @event.iapPrice;
+    }
+    else if (priceLevel == "Non-Member")
+    {
+    registration.amountBilled = @event.nonMemberPrice;
+    }*@
+        }
+
+
+
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Register and Make Payment" class="btn btn-default" />
+        </div>
+    </div>*@
+</div>

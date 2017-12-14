@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SimplyRegister.Models;
+using System.Data.Entity;
 
 namespace SimplyRegister.Controllers
 {
@@ -151,13 +152,22 @@ namespace SimplyRegister.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+
+        //public ActionResult Create([Bind(Include = "eventId,eventName,eventDate,eventType")] Event @event)
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            
             if (ModelState.IsValid)
             {
+               
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                //customer.userId = user.Id;
+                //customer.userId = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                ApplicationDbContext db = new ApplicationDbContext();
+                //db.Entry(customer).State = EntityState.Modified;
+                //db.SaveChanges();
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -171,15 +181,14 @@ namespace SimplyRegister.Controllers
 
                     if (user.IsAdmin == true)
                     {
-                        return RedirectToAction("AdminHomme", "Customers");
+                        return RedirectToAction("AdminHome", "Customers");
                     }
                     
                     else if (user.IsAdmin == false)
                     {
-                        return RedirectToAction("CustomerHome", "Customers");
+                        return RedirectToAction("Create", "Customers");
                     }
                     
-                    //return RedirectToAction("Create", "Administrators" )
                 }
                 AddErrors(result);
             }

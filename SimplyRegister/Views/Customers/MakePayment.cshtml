@@ -1,0 +1,44 @@
+﻿@model SimplyRegister.Models.Registration
+@{
+    ViewBag.Title = "MakePayment";
+}
+
+@*@if (Customer.companyMembershipLevel == "Corporate" || Customer.companyMembershipLevel == "Associate")*@
+
+{
+
+    <h2>MakePayment</h2>
+
+    <form action="/your-server-side-code" method="POST">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+                data-amount="10000"
+                data-name="Stripe.com"
+                data-description="Widget"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-zip-code="true">
+        </script>
+    </form>
+    
+    <p><a class="btn btn-default" href="InvoiceConfirmation">Send Invoice &raquo;</a></p>
+
+    @*<input type="button" value="Send Invoice" onclick="location.href='@Url.Action("InvoiceConfirmation","Customers")'" />*@
+
+
+}
+@*else
+{
+    <form action="/your-server-side-code" method="POST">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+                data-amount="10000"
+                data-name="Stripe.com"
+                data-description="Widget"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-zip-code="true">
+        </script>
+    </form>
+}*@
+

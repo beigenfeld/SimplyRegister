@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SimplyRegister.Models;
+using MVCEmail.Models;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace SimplyRegister.Controllers
 {
@@ -43,6 +46,7 @@ namespace SimplyRegister.Controllers
             {
                 companyId = 0,
                 Companies = companiesList
+                
             };
             return View(customer);
         }
@@ -56,11 +60,14 @@ namespace SimplyRegister.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUserName = User.Identity.Name;
+                var currentUserId = db.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).First();
                 customer.isAdmin = false;
+                customer.userId = currentUserId;
                 customer.customerCompany = company.companyId;
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Register", "Account", customer);
+                return RedirectToAction("CustomerHome", "Customers", customer);
             }
 
             return View(customer);
@@ -181,6 +188,86 @@ namespace SimplyRegister.Controllers
         {
             return View();
         }
+
+
+        public ActionResult MakePayment()
+        {
+            return View();
+        }
+
+        public ActionResult EventRegister(Customer customer, Event @event)
+        {
+            //double pricePoint;
+            //if (customer.company.companyMembershipLevel == "Corporate")
+            //{
+            //    pricePoint = @event.corporatePrice;
+            //}
+            //else if (customer.company.companyMembershipLevel == "Associate")
+            //{
+            //    pricePoint = @event.assocaitePrice;
+            //}
+            //else if (customer.company.companyMembershipLevel == "CBA")
+            //{
+            //    pricePoint = @event.cbaPrice;
+            //}
+            //else if (customer.company.companyMembershipLevel == "IAP")
+            //{
+            //    pricePoint = @event.iapPrice;
+            //}
+            //else if (customer.company.companyMembershipLevel == "Non-Member")
+            //{
+            //    pricePoint = @event.nonMemberPrice;
+            //}
+
+            return View();
+        }
+
+
+
+
+        
+        public ActionResult InvoiceConfirmation()
+        
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("umabob2017@gmail.com"));  // replace with valid value 
+                message.From = new MailAddress("umabob2017@gmail.com");  // replace with valid value
+                message.Subject = "Please Send Invoice";
+                message.Body = "Please send invoice";
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "umabob2017@gmail.com",  // replace with valid value
+                        Password = "UmaBob123!"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.Send (message);
+                    return View("InvoiceConfirmation");
+
+                }
+            }
+            return View();
+        }
+
+       //public ActionResult InvoiceConfirmation()
+       // {
+       //     return View();
+       // }
+        
+
+
+
+
+
 
 
 

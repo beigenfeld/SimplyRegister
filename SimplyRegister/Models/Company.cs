@@ -15,6 +15,6 @@ namespace SimplyRegister.Models
         
         public string mainContactEmail { get; set; }
 
-        public string companyMembershipLevel { get; set; }//Corporate, Assocaite, CBA, IAP, Non-Member
+        public string companyMembershipLevel { get; set; }//Corporate, Associate, CBA, IAP, Non-Member
     }
 }

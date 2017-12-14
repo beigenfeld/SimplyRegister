@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SimplyRegister.Models;
+using Microsoft.AspNet.Identity;
 
 namespace SimplyRegister.Controllers
 {
@@ -16,7 +17,7 @@ namespace SimplyRegister.Controllers
         
 
         // GET: Events
-        public ActionResult Index()
+        public ActionResult Index( )
         {
             return View(db.Events.ToList());
         }
@@ -177,10 +178,32 @@ namespace SimplyRegister.Controllers
             return View(@event);
         }
 
+        public ActionResult RegisterCustomer(int id)
+        {
 
+            var Id = User.Identity.GetUserId();
+            var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
+            var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
 
+            var @event = db.Events.SingleOrDefault(m => m.eventId == id);
+            //var user = ApplicationUserManager.//FindById(User.Identity.GetUserId())
+            var user = User.Identity.GetUserId();
+            return View(@event);
+        }
 
+        [HttpPost]
+        public ActionResult RegisterCustomer(Registration reg)
+        {
+            db.Registrations.Add(reg);
+            db.SaveChanges();
+            
+            //    db.Registrations(r => r.eventId == id );
+            //    //var @event = db.Events.SingleOrDefault(m => m.eventId == id);
+            //    var currentUserName = User.Identity.Name;
+            //    var currentUserId = db.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).First();
 
+            return View("MakePayment","Customers", reg);
+        }
 
 
 

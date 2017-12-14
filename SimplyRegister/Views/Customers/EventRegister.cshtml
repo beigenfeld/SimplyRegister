@@ -1,0 +1,23 @@
+﻿@model SimplyRegister.Models.Registration
+@{
+    ViewBag.Title = "EventRegister";
+}
+
+
+
+<h2>Register</h2>
+
+Register for:
+<dr>
+    @Html.DisplayFor(m => m.eventId)
+</dr>
+<br/>
+Your Price:
+<br/>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Register" class="btn btn-default" />
+    </div>
+</div>
+  
