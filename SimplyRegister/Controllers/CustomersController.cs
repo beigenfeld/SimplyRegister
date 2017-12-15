@@ -65,13 +65,41 @@ namespace SimplyRegister.Controllers
                 customer.isAdmin = false;
                 customer.userId = currentUserId;
                 customer.customerCompany = company.companyId;
+
+
+
+
                 db.Customers.Add(customer);
                 db.SaveChanges();
+
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("umabob2017@gmail.com"));  // replace with valid value 
+                message.From = new MailAddress("umabob2017@gmail.com");  // replace with valid value
+                message.Subject = "Verify Employment";
+                message.Body = "Please verify this person is an employee.";
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "umabob2017@gmail.com",  // replace with valid value
+                        Password = "UmaBob123!"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.Send(message);
+
+                }
                 return RedirectToAction("CustomerHome", "Customers", customer);
+                
             }
 
             return View(customer);
         }
+
 
         // GET: Customers/Edit/5
         public ActionResult Edit(string id)
@@ -188,10 +216,18 @@ namespace SimplyRegister.Controllers
         {
             return View();
         }
-
-
-        public ActionResult MakePayment()
+        public ActionResult MakePayment(Registration reg)
         {
+            db.Registrations.Add(reg);
+            db.SaveChanges();
+            return View(reg);
+        }
+        [HttpPost]
+        public ActionResult MakePayment(Registration reg, bool lala = false)
+        {
+            db.Registrations.Add(reg);
+            db.SaveChanges();
+            //return View("MakePayment", "Customers", reg);
             return View();
         }
 
@@ -258,13 +294,23 @@ namespace SimplyRegister.Controllers
             return View();
         }
 
-       //public ActionResult InvoiceConfirmation()
-       // {
-       //     return View();
-       // }
-        
+        //public ActionResult InvoiceConfirmation()
+        // {
+        //     return View();
+        // }
 
 
+        //public ActionResult MyEvents()
+        //{
+        //    foreach (var item in db.Registrations)
+        //    {
+        //        if (item.customerId == )
+        //        {
+
+        //        }
+        //    }
+        //    return View();
+        //}
 
 
 

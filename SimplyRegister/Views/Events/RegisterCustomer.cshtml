@@ -5,8 +5,8 @@
     ViewBag.Title = Model.eventName;
 }
 
-<h2>RegisterCustomer</h2>
-<h2>@Model.eventName</h2>
+@*<h2>RegisterCustomer</h2>
+<h2>@Model.eventName</h2>*@
 
 <div>
 
@@ -18,10 +18,10 @@
         var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
         var priceLevel = company.companyMembershipLevel;
         double actualPrice = 0;
-        <h2>@customer.firstName</h2>
-        <h2>@company.companyName</h2>
+        <h2>@customer.firstName, would you like to register for:</h2><br/>
+        <h2>@Model.eventName</h2>
 
-        <p>Your price:</p>
+        <h2>Your price:</h2>
         if (priceLevel == "Corporate")
         {
             <h2> $@Model.corporatePrice</h2>
@@ -51,7 +51,26 @@
         registration.customerId = customer.customerId;
         registration.eventId = Model.eventId;
         registration.amountBilled = actualPrice;
-        @Html.ActionLink("Register & Pay", "RegisterCustomer", "Events", new { reg = registration}, null)
+
+
+       
+        
+            @Html.ActionLink("Yes, Register & Pay", "RegisterCustomerTwo", new { customerId = customer.customerId, eventId = Model.eventId, amountBilled = actualPrice }, null)
+        
+
+
+
+        @*<div class="form-group"> 
+            @Html.HiddenFor(registration);
+            @Html.HiddenFor(m => m.Password)
+            @Html.HiddenFor(m => m.ConfirmPassword)
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register and Make Payment" class="btn btn-default" />
+            </div>
+
+        </div>*@
+
+
 
         //var currentUserName = <h2>@User.Identity.Name;</h2>
                 @*var currentUserId = <h2>@Model.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).First();</h2>*@
@@ -83,9 +102,5 @@
 
 
 
-    @*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Register and Make Payment" class="btn btn-default" />
-        </div>
-    </div>*@
+    
 </div>

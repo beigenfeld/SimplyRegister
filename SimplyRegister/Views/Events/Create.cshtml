@@ -42,7 +42,7 @@
                 @Html.DropDownListFor(e => e.eventType, new List<SelectListItem>
                 { new SelectListItem{Text="Corporate", Value="Corporate"},
                  new SelectListItem{Text="Training", Value="Training"},
-                 new SelectListItem{Text="CLC", Value="CLC"},
+                 //new SelectListItem{Text="CLC", Value="CLC"},
                 }, "Select Event Type")
                 @Html.ValidationMessageFor(model => model.eventType, "", new { @class = "text-danger" })
             </div>

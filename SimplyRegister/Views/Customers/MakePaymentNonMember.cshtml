@@ -1,18 +1,16 @@
-﻿@model SimplyRegister.Models.Registration
+﻿
 @{
-    ViewBag.Title = "MakePayment";
+    ViewBag.Title = "MakePaymentNonMember";
 }
 
-@*@if (.companyMembershipLevel == "Corporate" || Customer.companyMembershipLevel == "Associate")*@
+<h2>MakePaymentNonMember</h2>
 
 
-
-    <h2>MakePayment</h2>
 
 <form action="/your-server-side-code" method="POST">
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-            data-amount="10000"
+            data-amount="000"
             data-name="Stripe.com"
             data-description="Widget"
             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
@@ -20,8 +18,3 @@
             data-zip-code="true">
     </script>
 </form>
-<br/>
-<p><a class="btn btn-default" href="InvoiceConfirmation">Send Invoice &raquo;</a></p>
-
-   
-

@@ -13,7 +13,7 @@ namespace SimplyRegister.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712131958229_init"; }
+            get { return "201712151532017_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -5,9 +5,9 @@
 }
 
 <h2>List of Events</h2>
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -36,8 +36,8 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.eventName)
@@ -59,8 +59,9 @@
             {
                 @Html.DisplayName("Members Only")
             }
-            else {
-            @Html.DisplayFor(modelItem => item.cbaPrice)
+            else
+            {
+                @Html.DisplayFor(modelItem => item.cbaPrice)
             }
         </td>
         <td>
@@ -79,28 +80,17 @@
                 @Html.DisplayName("Members Only")
             }
             else
-            { 
+            {
                 @Html.DisplayFor(modelItem => item.nonMemberPrice)
             }
-         </td>
 
-        @*<td>
-            <p><a class="btn btn-default" href="..\Customers\EventRegister">Register &raquo;</a></p>
-        </td>*@
-       
-        
-        
-        
-         <td>
-            @Html.ActionLink("Register", "RegisterCustomer","Events", new { id=item.eventId }, null) 
-
-
-             @Html.ActionLink("Edit", "Edit", new { id = item.eventId }) |
-
-            @*@Html.ActionLink("Details", "Details", new { id=item.eventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.eventId })*@
         </td>
-    </tr>
-}
+        <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.eventId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.eventId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.eventId })
+        </td>
+        
 
-</table>
+</tr>
+}

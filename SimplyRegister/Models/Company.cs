@@ -10,11 +10,11 @@ namespace SimplyRegister.Models
     {
         [Key]
         public int companyId { get; set; }
-
+        [Display(Name = "Company Name")]
         public string companyName { get; set; }
-        
+        [Display(Name = "Main Contact Email")]
         public string mainContactEmail { get; set; }
-
+        [Display(Name = "Company Membership Level")]
         public string companyMembershipLevel { get; set; }//Corporate, Associate, CBA, IAP, Non-Member
     }
 }

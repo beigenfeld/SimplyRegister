@@ -70,7 +70,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Events/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
@@ -101,7 +101,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Events/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
@@ -118,7 +118,7 @@ namespace SimplyRegister.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
             db.Events.Remove(@event);
@@ -151,7 +151,7 @@ namespace SimplyRegister.Controllers
             {
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminEventIndex");
             }
             return View(@event);
             
@@ -188,21 +188,43 @@ namespace SimplyRegister.Controllers
             var @event = db.Events.SingleOrDefault(m => m.eventId == id);
             //var user = ApplicationUserManager.//FindById(User.Identity.GetUserId())
             var user = User.Identity.GetUserId();
-            return View(@event);
+            if(@event.eventType == "Corporate" && company.companyMembershipLevel != "Corporate" && company.companyMembershipLevel != "Associate")
+            {
+                return View("RegisterCustomerNonMember");
+            }
+            else
+            {
+                return View(@event);
+                
+            }
+            
+        }
+
+        
+        public ActionResult RegisterCustomerTwo(int customerId,int eventId, double amountBilled)
+        {
+            Registration reg = new Registration();
+            reg.customerId = customerId;
+            reg.eventId = eventId;
+            reg.amountBilled = amountBilled;
+
+            db.Registrations.Add(reg);
+            db.SaveChanges();
+            return RedirectToAction("MakePayment", "Customers", reg);
         }
 
         [HttpPost]
-        public ActionResult RegisterCustomer(Registration reg)
+        public ActionResult AddRegistration(Registration reg)
         {
             db.Registrations.Add(reg);
             db.SaveChanges();
-            
-            //    db.Registrations(r => r.eventId == id );
-            //    //var @event = db.Events.SingleOrDefault(m => m.eventId == id);
-            //    var currentUserName = User.Identity.Name;
-            //    var currentUserId = db.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).First();
+            return View("MakePayment", "Customers", reg);
+        }
 
-            return View("MakePayment","Customers", reg);
+        public ActionResult AdminEventIndex()
+        {
+            
+            return View(db.Events.ToList());
         }
 
 

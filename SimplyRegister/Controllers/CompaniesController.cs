@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SimplyRegister.Models;
+using System.Net.Mail;
 
 namespace SimplyRegister.Controllers
 {
@@ -21,7 +22,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Companies/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
@@ -66,13 +67,35 @@ namespace SimplyRegister.Controllers
                 companyInDB.companyName = company.companyName;
                 companyInDB.mainContactEmail = company.mainContactEmail;
                 companyInDB.companyMembershipLevel = company.companyMembershipLevel;
+
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("umabob2017@gmail.com"));  // replace with valid value 
+                message.From = new MailAddress("umabob2017@gmail.com");  // replace with valid value
+                message.Subject = "Confirm This Person is an Employee";
+                message.Body = "Please confirm this person is a current employee ar your company.";
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "umabob2017@gmail.com",  // replace with valid value
+                        Password = "UmaBob123!"  // replace with valid value
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.Send(message);
+
+                }
             }
             db.SaveChanges();
             return RedirectToAction("Index", "Companies");
         }
 
         // GET: Companies/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
@@ -103,7 +126,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Companies/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
@@ -120,7 +143,7 @@ namespace SimplyRegister.Controllers
         // POST: Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Company company = db.Companies.Find(id);
             db.Companies.Remove(company);
