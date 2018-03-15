@@ -1,11 +1,29 @@
-﻿
+﻿@model SimplyRegister.Models.Customer
+@using Microsoft.AspNet.Identity;
+@using SimplyRegister.Models;
 @{
     ViewBag.Title = "Customer Home Page";
 }
 
 <h2>Customer Home</h2>
 
+<div>
+    @{
+        ApplicationDbContext db = new ApplicationDbContext();
+        var Id = User.Identity.GetUserId();
 
-<p><a class="btn btn-default" href="..\Events\Index">See All Events &raquo;</a></p>
+       var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
+       var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
 
-@*<p><a class="btn btn-default" href="MyEvents">See Events I'm Registered For</a></p>*@
+        <h2>@customer.firstName @customer.lastName</h2><br/>
+       <h2>@company.companyName</h2><br/>
+       <h2>Membership Level: @company.companyMembershipLevel</h2>
+        <h3>I've Changed Companies! @Html.ActionLink("Click Here", "UpdateCompany", "Customers")</h3>
+
+        <a class="btn btn-default" href="..\Events\Index">See All Events &raquo;</a>
+
+
+
+        @*<p><a class="btn btn-default" href="MyEvents">See Events I'm Registered For</a></p>*@
+        }
+</div>

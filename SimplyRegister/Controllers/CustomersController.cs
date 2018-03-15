@@ -24,7 +24,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Customers/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -102,7 +102,7 @@ namespace SimplyRegister.Controllers
 
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -133,7 +133,7 @@ namespace SimplyRegister.Controllers
         }
 
         // GET: Customers/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace SimplyRegister.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Customer customer = db.Customers.Find(id);
             db.Customers.Remove(customer);
@@ -294,6 +294,30 @@ namespace SimplyRegister.Controllers
             return View();
         }
 
+        public ActionResult UpdateCompany()
+        {
+            var currentUserName = User.Identity.Name;
+            var currentUserId = db.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).FirstOrDefault();
+            var customer = db.Customers.Where(m => m.userId == currentUserId).FirstOrDefault();
+            
+            var companiesList = db.Companies.ToList();
+            customer.Companies = companiesList;
+              
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCompany([Bind(Include = "customerId,firstName,lastName,customerCompany,clcMember")] Customer customer, Company company)
+        {
+            var currentUserName = User.Identity.Name;
+            var currentUserId = db.Users.Where(m => m.UserName == currentUserName).Select(m => m.Id).FirstOrDefault();
+            var currentCustomer = db.Customers.Where(m => m.userId == currentUserId).First();
+            currentCustomer.customerCompany = company.companyId;
+            db.SaveChanges();
+            return RedirectToAction("CompanyUpdated");
+        }
+
+
         //public ActionResult InvoiceConfirmation()
         // {
         //     return View();
@@ -313,7 +337,10 @@ namespace SimplyRegister.Controllers
         //}
 
 
-
+        public ActionResult CompanyUpdated()
+        {
+            return View();
+        }
 
 
 

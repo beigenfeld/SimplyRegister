@@ -1,0 +1,29 @@
+﻿@model SimplyRegister.Models.Customer
+@{
+    ViewBag.Title = "UpdateCompany";
+}
+
+<h2>Update Company</h2>
+
+My new company is:
+@using (Html.BeginForm())
+{
+<div class="form-group">
+    @Html.LabelFor(model => model.customerCompany, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.companyId, new SelectList(Model.Companies, "companyId", "companyName"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.customerCompany, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Update" class="btn btn-default" />
+    </div>
+</div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

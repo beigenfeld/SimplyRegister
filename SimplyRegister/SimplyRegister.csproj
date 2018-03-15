@@ -294,6 +294,8 @@
     <Content Include="Views\Customers\MyEvents.cshtml" />
     <Content Include="Views\Customers\AdminIndex.cshtml" />
     <Content Include="Views\Events\AdminEventIndex.cshtml" />
+    <Content Include="Views\Customers\UpdateCompany.cshtml" />
+    <Content Include="Views\Customers\CompanyUpdated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
