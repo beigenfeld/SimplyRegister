@@ -13,7 +13,7 @@
         var Id = User.Identity.GetUserId();
 
        var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
-       var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
+        var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
 
         <h2>@customer.firstName @customer.lastName</h2><br/>
        <h2>@company.companyName</h2><br/>

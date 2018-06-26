@@ -2,12 +2,20 @@
     ViewBag.Title = "Simply Register Home Page";
 }
 
-<div class="jumbotron">
+<style>
+#myJumbotron {
+    background: url("..\\..\\Content\\quill.jpeg");
+    background-repeat: round;
+}
+</style>
+
+
+
+<div class="jumbotron" id="myJumbotron">
     <h1>Simply Register</h1>
-    <p class="lead">A multi-layered association's solution to online registration.</p>
+    <p class="lead"><span style="background-color:white"> A multi-layered association's solution to online registration.</span></p>
     <p><a href="..\Home\About" class="btn btn-primary btn-lg">Learn More &raquo;</a></p>
 </div>
-
 <div class="row">
     <div class="col-md-4">
         <h2>Create Your Profile</h2>
@@ -15,22 +23,23 @@
             Enter your contact information, link to your company, and start receiving the benefits your company reveives as a Member of our Association!  
             Not a member company?  Find out how to become one <a href='http://agc-gm.org/members/member-information'>Here</a>
         <p><a class="btn btn-default" href="..\Account\Register">Register Here &raquo;</a></p><br/>
-        <p>Already Logged In?  Click here to go to your @Html.ActionLink("Customer Home", "CustomerHome", "Customers") page</p>
+    <div style="border: solid black 1px; padding:5px">
+        <h2>Already Logged In?</h2>  <p>Click here to go to your @Html.ActionLink("Customer Home", "CustomerHome", "Customers") page</p>
+    </div>
     </div>
     <div class="col-md-4">
         <h2>See Our List of Events</h2>
         <p>See a list of all the events and trainings our Association is putting on.  
             Our trainings are open to the public, but some of our Corporate events are for Members Only.  
             We'll let you know the price and if you're able to register based on your company's level of membership.</p>
-        <p><a class="btn btn-default" href="..\Events\Index">See Events &raquo;</a></p>
+        <p><a class="btn btn-default" href="..\Events\Index">&raquo; See Events &raquo;</a></p>
     </div>
+</div>
+
 <div>
     <div class="col-md-4">
         <h2>Administration Log In</h2>
         <p>Log in with your administrator credentials here to add or modify events, or to manage a cutomer account.</p>
         <p><a class="btn btn-default" href="..\Customers\CompanyPassword">Admin Login &raquo;</a></p>
     </div>
-@*</div>
-    <p><a class="btn btn-default" href="Test">Test Styles &raquo;</a></p>*@
-</div>
-</div>
+</div> 
