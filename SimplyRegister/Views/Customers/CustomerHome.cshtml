@@ -1,4 +1,4 @@
-﻿@model SimplyRegister.Models.Customer
+﻿@*@model SimplyRegister.Models.Customer*@
 @using Microsoft.AspNet.Identity;
 @using SimplyRegister.Models;
 @{
@@ -12,15 +12,19 @@
         ApplicationDbContext db = new ApplicationDbContext();
         var Id = User.Identity.GetUserId();
 
-       var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
+        var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
         var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
 
-        <h2>@customer.firstName @customer.lastName</h2><br/>
-       <h2>@company.companyName</h2><br/>
-       <h2>Membership Level: @company.companyMembershipLevel</h2>
-        <h3>I've Changed Companies! @Html.ActionLink("Click Here", "UpdateCompany", "Customers")</h3>
-
-        <a class="btn btn-default" href="..\Events\Index">See All Events &raquo;</a>
+        <div style="font-size: 25px">
+            Name: @customer.firstName @customer.lastName<br />
+            Company: @company.companyName<br />
+            Membership Level: @company.companyMembershipLevel<br />
+            Register for Events: <a class="btn btn-default" href="..\Events\Index">See All Events &raquo;</a>
+        </div>
+        <br/>
+        <p style="font-size: 20px">I've Changed Companies! @Html.ActionLink("Click Here", "UpdateCompany", "Customers")</p>
+        
+       
 
 
 
