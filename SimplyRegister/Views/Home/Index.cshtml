@@ -4,22 +4,38 @@
 @using Microsoft.AspNet.Identity;
 @using SimplyRegister.Models;
 
+-
+<style>
+    #homePageJumbotron {
+        background: url("..\\..\\Content\\quill.jpeg"); 
+        background-repeat: round; 
+    }
+</style>
 
 
-
-<div class="jumbotron" id="myJumbotron">
+<div class="jumbotron" id="homePageJumbotron">
     <h1>Simply Register</h1>
     <p><span style="background-color:white"> A multi-layered association's solution to online registration.</span></p>
     <p><a href="..\Home\About" class="btn btn-primary btn-lg">Learn More &raquo;</a></p>
 </div>
 <div class="row">
-    <div class="col-md-4">
-        <h2>Create Your Profile</h2>
-        <p>
-            Enter your contact information, link to your company, and start receiving the benefits your company reveives as a Member of our Association!
-            Not a member company?  Find out how to become one <a href='http://agc-gm.org/members/member-information'>Here</a>
-        <p><a class="btn btn-default" href="..\Account\Register">Register Here &raquo;</a></p><br />
-    </div>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-4">
+            <h2>Create Your Profile</h2>
+            <p>
+                Enter your contact information, link to your company, and start receiving the benefits your company reveives as a Member of our Association!
+                Not a member company?  Find out how to become one <a href='http://agc-gm.org/members/member-information'>Here</a>
+            <p>
+                <a class="btn btn-default" href="..\Account\Register">Register Here &raquo;</a><br />
+                -OR-<br/>
+                <a class="btn btn-default" href="..\Account\Login">Log In Here &raquo;</a>
+            </p>
+
+        </div>
+    }
+    
     
     @if (User.Identity.IsAuthenticated)
     {
@@ -29,15 +45,18 @@
         <div style="border: solid black 1px; padding:5px" id="loggedIn">
             <h2>Welcome @customer.firstName!</h2>  <p>Click here to go to your @Html.ActionLink("Customer Home", "CustomerHome", "Customers") page</p>
         </div>
+        <div class="col-md-4">
+            <h2>See Our List of Events</h2>
+            <p>
+                See a list of all the events and trainings our Association is putting on.
+                Our trainings are open to the public, but some of our Corporate events are for Members Only.
+                We'll let you know the price and if you're able to register based on your company's level of membership.
+            </p>
+            <p><a class="btn btn-default" href="..\Events\Index">&raquo; See Events &raquo;</a></p>
+        </div>
     }
 
-    <div class="col-md-4">
-        <h2>See Our List of Events</h2>
-        <p>See a list of all the events and trainings our Association is putting on.  
-            Our trainings are open to the public, but some of our Corporate events are for Members Only.  
-            We'll let you know the price and if you're able to register based on your company's level of membership.</p>
-        <p><a class="btn btn-default" href="..\Events\Index">&raquo; See Events &raquo;</a></p>
-    </div>
+    
 </div>
 
 <div style="padding: 15px">
