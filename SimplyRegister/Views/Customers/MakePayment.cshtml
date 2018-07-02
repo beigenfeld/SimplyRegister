@@ -1,18 +1,29 @@
 ﻿@model SimplyRegister.Models.Registration
+@using Microsoft.AspNet.Identity;
+@using SimplyRegister.Models;
 @{
     ViewBag.Title = "MakePayment";
 }
 
 @*@if (.companyMembershipLevel == "Corporate" || Customer.companyMembershipLevel == "Associate")*@
 
+@{ApplicationDbContext db = new ApplicationDbContext();
+    var Id = User.Identity.GetUserId();
 
+    var customer = db.Customers.FirstOrDefault(c => c.userId == Id);
+    var company = db.Companies.FirstOrDefault(c => c.companyId == customer.customerCompany);
+    var priceLevel = company.companyMembershipLevel;
+    var displayPrice = Model.amountBilled *100;
+    
+}
 
     <h2>Make Payment</h2>
+    
 
 <form action="/your-server-side-code" method="POST">
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-            data-amount="10000"
+            data-amount=@displayPrice
             data-name="Stripe.com"
             data-description="Widget"
             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
@@ -21,7 +32,12 @@
     </script>
 </form>
 <br/>
-<p><a class="btn btn-default" href="InvoiceConfirmation">Send Invoice &raquo;</a></p>
+@{ 
+    if (company.companyMembershipLevel == "Associate" || company.companyMembershipLevel == "Corporate")
+    {
+        <p><a class="btn btn-default" href="InvoiceConfirmation">Send Invoice &raquo;</a></p>
+    }
 
-   
+}
+
 
